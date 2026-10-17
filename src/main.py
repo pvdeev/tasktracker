@@ -17,24 +17,24 @@ def exibir_menu():
 def cadastrar_tarefa(lista_tarefas, proximo_id):
     print("\n--- CADASTRAR NOVA TAREFA ---")
     
-    # Validação do Título: Obrigatório, rejeita vazios ou espaços em branco
+    
     while True:
         titulo = input("Digite o título da tarefa (Obrigatório): ").strip()
         if titulo:
             break
         print("❌ Erro: O título não pode ser vazio ou composto apenas por espaços!")
 
-    # Descrição: Detalhamento livre da tarefa
+    
     descricao = input("Digite a descrição da tarefa (Opcional): ").strip()
     if not descricao:
         descricao = "Sem descrição informada"
 
-    # Data Limite
+    
     prazo = input("Digite a data limite (ex: DD/MM/AAAA): ").strip()
     if not prazo:
         prazo = "Não informada"
 
-    # Validação estrita da Prioridade: Apenas Alta, Média/Media ou Baixa
+    
     prioridades_validas = ["alta", "média", "media", "baixa"]
     while True:
         prioridade_input = input("Selecione a prioridade (Alta, Média, Baixa): ").strip()
@@ -47,7 +47,7 @@ def cadastrar_tarefa(lista_tarefas, proximo_id):
             break
         print("❌ Erro: Prioridade inválida! Escolha estritamente entre 'Alta', 'Média' ou 'Baixa'.")
 
-    # Dicionário representando a entidade Tarefa com status padrão "Pendente"
+   
     nova_tarefa = {
         "id": proximo_id,
         "titulo": titulo,
