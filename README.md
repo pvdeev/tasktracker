@@ -13,3 +13,12 @@ A documentação completa contendo o planejamento lógico, diagrama IPO, dicion�
 
 ---
 Desenvolvido por **Paulo** — Estudante de ADS no CEUB.
+## 🐳 Como Executar com Docker (Fase 3)
+
+Se preferires executar a aplicação de forma isolada utilizando Docker, segue os passos abaixo:
+
+1. Certifica-te de que tens o Docker instalado na tua máquina.
+2. Na raiz do projeto, constrói a imagem Docker:
+   ```bash
+   docker build -t tasktracker-app .
+   docker run -it tasktracker-app

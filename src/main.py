@@ -4,20 +4,22 @@ Fase 2: Etapa Intermediária do Bootcamp II
 Estudante: Paulo - Análise e Desenvolvimento de Sistemas (CEUB)
 """
 
+
 def exibir_menu():
     print("\n=================================")
     print("        TASKTRACKER - MENU       ")
     print("=================================")
     print("1. Cadastrar nova tarefa")
     print("2. Visualizar tarefas cadastradas")
-    print("3. Sair da aplicação")
+    print("3. Concluir tarefa")
+    print("4. Sair da aplicação")
     print("=================================")
 
 
 def cadastrar_tarefa(lista_tarefas, proximo_id):
     print("\n--- CADASTRAR NOVA TAREFA ---")
-    
-    # Validação do Título: Obrigatório, rejeita vazios ou espaços em branco
+
+    # Validação do Título: Obrigatório, rejeita vazios ou apenas espaços
     while True:
         titulo = input("Digite o título da tarefa (Obrigatório): ").strip()
         if titulo:
@@ -47,14 +49,14 @@ def cadastrar_tarefa(lista_tarefas, proximo_id):
             break
         print("❌ Erro: Prioridade inválida! Escolha estritamente entre 'Alta', 'Média' ou 'Baixa'.")
 
-    # Dicionário representando a entidade Tarefa com status padrão "Pendente"
+    # Dicionário representando a entidade Tarefa
     nova_tarefa = {
         "id": proximo_id,
         "titulo": titulo,
         "descricao": descricao,
         "prazo": prazo,
         "prioridade": prioridade,
-        "status": "Pendente"
+        "status": "Pendente",
     }
 
     lista_tarefas.append(nova_tarefa)
@@ -79,6 +81,32 @@ def visualizar_tarefas(lista_tarefas):
         print("-" * 35)
 
 
+def concluir_tarefa(lista_tarefas):
+    print("\n--- CONCLUIR TAREFA ---")
+    if not lista_tarefas:
+        print("📭 Nenhuma tarefa cadastrada para concluir.")
+        return
+
+    visualizar_tarefas(lista_tarefas)
+
+    try:
+        id_busca = int(input("\nDigite o ID da tarefa que deseja marcar como concluída: "))
+    except ValueError:
+        print("❌ Erro: Por favor, digite um número inteiro válido para o ID.")
+        return
+
+    for tarefa in lista_tarefas:
+        if tarefa["id"] == id_busca:
+            if tarefa["status"] == "Concluída":
+                print(f"⚠️ A tarefa #{id_busca} já está marcada como concluída!")
+            else:
+                tarefa["status"] = "Concluída"
+                print(f"✅ Sucesso: Tarefa #{id_busca} ('{tarefa['titulo']}') marcada como Concluída!")
+            return
+
+    print(f"❌ Erro: Nenhuma tarefa foi encontrada com o ID #{id_busca}.")
+
+
 def main():
     lista_tarefas = []
     proximo_id = 1
@@ -87,17 +115,19 @@ def main():
 
     while True:
         exibir_menu()
-        opcao = input("Escolha uma opção (1-3): ").strip()
+        opcao = input("Escolha uma opção (1-4): ").strip()
 
         if opcao == "1":
             proximo_id = cadastrar_tarefa(lista_tarefas, proximo_id)
         elif opcao == "2":
             visualizar_tarefas(lista_tarefas)
         elif opcao == "3":
+            concluir_tarefa(lista_tarefas)
+        elif opcao == "4":
             print("\n👋 Encerrando o TaskTracker. Até logo!")
             break
         else:
-            print("\n❌ Erro: Opção inválida! Escolha um número entre 1 e 3.")
+            print("\n❌ Erro: Opção inválida! Escolha um número entre 1 e 4.")
 
 
 if __name__ == "__main__":
