@@ -22,3 +22,14 @@ Se preferires executar a aplicação de forma isolada utilizando Docker, segue o
    ```bash
    docker build -t tasktracker-app .
    docker run -it tasktracker-app
+## 🐳 Containerização e Orquestração (Fase 3 & Etapa Final)
+
+O projeto está totalmente preparado para ser executado em ambientes isolados utilizando Docker e Docker Compose:
+
+1. **Construir a imagem Docker:**
+   ```bash
+   docker build -t tasktracker-app .
+
+   docker run -it tasktracker-app
+
+   docker compose run tasktracker
